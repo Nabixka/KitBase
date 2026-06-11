@@ -5,4 +5,4 @@ import { databaseService } from './database.service';
   exports: [databaseService],
   providers: [databaseService],
 })
-export class AppModule {}
+export class databaseModule {}

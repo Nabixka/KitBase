@@ -3,7 +3,10 @@
  * @returns { Promise<void> }
  */
 exports.up = function(knex) {
-  
+  return knex.schema.createTable('game', function(table){
+    table.increments()
+    table.
+  })
 };
 
 /**
