@@ -15,6 +15,9 @@ module.exports = {
     },
     migrations: {
       directory: 'knex_migrations'
+    },
+    seeds: {
+      directory: 'knex_seeders'
     }
   }
 

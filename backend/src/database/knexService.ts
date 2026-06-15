@@ -4,7 +4,7 @@ import * as config from "../../knexfile"
 
 
 @Injectable()
-export class knexService {
+export class KnexService {
     private db;
 
     constructor(){

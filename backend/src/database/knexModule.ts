@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
-import { knexService } from './knexService';
+import { KnexService } from './knexService';
 
 @Module({
-  exports: [knexService],
-  providers: [knexService]
+  exports: [KnexService],
+  providers: [KnexService]
 })
 export class knexModule {}
