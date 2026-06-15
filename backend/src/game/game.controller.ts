@@ -1,4 +1,4 @@
-import { BadRequestException, Body, Controller, Delete, Get, Param, Post, UploadedFile, UseInterceptors } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Delete, Get, Param, Patch, Post, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { GameService } from './game.service';
 import { ValidateGameExist } from 'src/Pipes/ValidateGameExist';
 import { FileInterceptor } from '@nestjs/platform-express';
@@ -33,6 +33,21 @@ export class GameController {
   create(@Body() data: { name: string}, @UploadedFile() file: Express.Multer.File){
     if(!file || !data.name ) throw new BadRequestException("Isi Data Dengan Benar")
     return this.gameService.create({...data, image: `/uploads/game/${file.filename}`})
+  }
+
+  @Patch('/:id')
+  @UseInterceptors(FileInterceptor('image', {
+    storage: diskStorage({
+      destination: './uploads/game',
+      filename(req, file, callback) {
+        const unique = Date.now() + '-' + Math.round(Math.random() * 1e9 )
+        const ext = extname(file.originalname)
+        callback(null, `${file.fieldname}-${unique}-${ext}`)
+      },
+    })
+  }))
+  update(@Param('id', ValidateGameExist) id: string, @Body() data: { name: string }, @UploadedFile() file: Express.Multer.File){
+    return this.gameService.update(Number(id), {...data, image: file ? `/uploads/game/${file.filename}` : undefined})
   }
 
   @Delete('/:id')

@@ -25,14 +25,23 @@ export class GameService {
 
     async create(data: { name: string, image: string}){
         const [create] = await this.knexService.connection('game')
-        .insert({
-            "name" : data.name,
-            "image" : data.image
-        })
+        .insert(data)
         .returning("*")
         return {
             message: "Berhasil Membuat Game",
             data: create
+        }
+    }
+
+    async update(id: Number, data: {name: string, image?: string}){
+        const [update] = await this.knexService.connection('game')
+        .update(data)
+        .where({id})
+        .returning("*")
+
+        return {
+            message: "Berhasil Update",
+            data:  update
         }
     }
 
