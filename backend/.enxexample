@@ -1,0 +1,4 @@
+DB_NAME = "kitbase"
+DB_USER = "postgres"
+DB_PASS = "YOUR_PASS"
+DB_HOST = "localhost"

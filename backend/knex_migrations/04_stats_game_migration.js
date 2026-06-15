@@ -5,11 +5,11 @@
 exports.up = function(knex) {
   return knex.schema.createTable('stats_game', function(table){
     table.increments()
-    table.integer("game_id").unsigned()
-    table.integer("stats_id").unsigned()
+    table.integer("game_id").unsigned().notNullable()
+    table.string('stat_name').notNullable()
+    table.integer('value').notNullable()
 
-    table.foreign("game_id").references("game.id")
-    table.foreign("stats_id").references("stats.id")
+    table.foreign("game_id").references("game.id").onDelete('CASCADE')
   })
 };
 
