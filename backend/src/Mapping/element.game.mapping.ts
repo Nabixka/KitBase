@@ -40,3 +40,17 @@ export function ElementByGameMapping(data: any[]){
         }))
     }
 }
+
+export function CreateElementMapping(data: any){
+    return {
+        game: {
+            id: data.game_id,
+            name: data.game_name
+        },
+        element: {
+            id: data.id,
+            name: data.element_name,
+            icon: data.element_icon
+        }
+    }
+}
