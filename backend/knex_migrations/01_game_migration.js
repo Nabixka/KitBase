@@ -5,7 +5,7 @@
 exports.up = function(knex) {
   return knex.schema.createTable('game', function(table){
     table.increments()
-    table.string("name").notNullable()
+    table.string("name").notNullable().index()
     table.text("image").notNullable()
   })
 };

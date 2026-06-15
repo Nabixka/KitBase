@@ -6,7 +6,7 @@ exports.up = function(knex) {
   return knex.schema.createTable('kits_type_game', function(table){
     table.increments()
     table.string('kits_type_name').notNullable()
-    table.integer('game_id').unsigned().notNullable()
+    table.integer('game_id').unsigned().notNullable().index()
 
     table.foreign('game_id').references('game.id').onDelete('CASCADE')
   })
