@@ -63,9 +63,9 @@ export class ElementGameService {
         }
     }
 
-    async update(data: { element_name: string, element_icon?: string, game_id: number}){
-        const [update] = await this.knexService.connection("element_name").update(data).returning("id")
-        const get = await this.knexService.connection("element_name")
+    async update(id: number, data: { element_name: string, element_icon?: string, game_id: number}){
+        const [update] = await this.knexService.connection("element_game").update(data).where('id', id).returning("id")
+        const get = await this.knexService.connection("element_game")
         .join("game", "game.id", "game_id")
         .select({
             id: "element_game.id",

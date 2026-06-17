@@ -36,7 +36,7 @@ export class ElementGameController {
     return this.elementGameService.create({...data, element_icon: `/uploads/elements/${file.filename}`})
   }
 
-  @Patch()
+  @Patch('/:id')
   @UseInterceptors(FileInterceptor('element_icon', {
     storage: diskStorage({
       destination: './uploads/element',
@@ -47,8 +47,8 @@ export class ElementGameController {
       },
     })
   }))
-  updateGame(@Body() data: { element_name: string, game_id: number}, @UploadedFile() file: Express.Multer.File){
-    return this.elementGameService.update({...data, element_icon: file ? `/uploads/element/${file.filename}` : undefined})
+  updateGame(@Param('id') id: string,  @Body() data: { element_name: string, game_id: number}, @UploadedFile() file: Express.Multer.File){
+    return this.elementGameService.update(Number(id), {...data, element_icon: file ? `/uploads/element/${file.filename}` : undefined})
   }
 
   @Delete('/:id')
