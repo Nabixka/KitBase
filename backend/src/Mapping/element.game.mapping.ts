@@ -41,7 +41,7 @@ export function ElementByGameMapping(data: any[]){
     }
 }
 
-export function CreateElementMapping(data: any){
+export function ChangeElementMapping(data: any){
     return {
         game: {
             id: data.game_id,

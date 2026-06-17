@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { KnexService } from 'src/database/knexService';
-import { CreateElementMapping, ElementByGameMapping, GroupElementByGame } from 'src/Mapping/element.game.mapping';
+import { ChangeElementMapping, ElementByGameMapping, GroupElementByGame } from 'src/Mapping/element.game.mapping';
 
 @Injectable()
 export class ElementGameService {
@@ -44,7 +44,7 @@ export class ElementGameService {
     }
 
     async create(data: {element_name: string, element_icon: string, game_id: number}){
-        const create = await this.knexService.connection("element_game").insert({data}).returning("id")
+        const [create] = await this.knexService.connection("element_game").insert(data).returning("id")
         const get = await this.knexService.connection("element_game")
         .join("game", "game.id", "game_id")
         .select({
@@ -54,11 +54,32 @@ export class ElementGameService {
             game_id: "game.id",
             game_name: "game.name"
         })
-        .where("element_id", create.id)
+        .where("element_game.id", create.id)
+        .first()
 
         return {
             message: "Berhasil Membuat Element",
-            data: CreateElementMapping(get)
+            data: ChangeElementMapping(get)
+        }
+    }
+
+    async update(data: { element_name: string, element_icon?: string, game_id: number}){
+        const [update] = await this.knexService.connection("element_name").update(data).returning("id")
+        const get = await this.knexService.connection("element_name")
+        .join("game", "game.id", "game_id")
+        .select({
+            id: "element_game.id",
+            element_name: "element_game.element_name",
+            element_icon: "element_game.element_icon",
+            game_id: "game.id",
+            game_name: "game.name"
+        })
+        .where("element_game.id", update.id)
+        .first()
+
+        return {
+            message: "Berhasil Mengubah Element",
+            data: ChangeElementMapping(get)
         }
     }
 
