@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { KnexService } from 'src/database/knexService';
-import { GroupRarityByGame, RarityByGame } from 'src/Mapping/rarity.game.mapping';
+import { ChangeRarity, GroupRarityByGame, RarityByGame } from 'src/Mapping/rarity.game.mapping';
 
 @Injectable()
 export class RarityGameService {
@@ -40,6 +40,26 @@ export class RarityGameService {
         return {
             message: "Berhasil Mengambil Rarity",
             data: RarityByGame(get)
+        }
+    }
+
+    async create(data: { value: string, icon: string, game_id: number}){
+        const [create] = await this.knexService.connection("rarity_game").insert(data).returning("id")
+        const get = await this.knexService.connection("rarity_game")
+        .join("game", "game.id", "game_id")
+        .select({
+            "id": "rarity_game.id",
+            "game_id": "game.id",
+            "game_name": "game.name",
+            "icon": "rarity_game.icon",
+            "value": "rarity_game.value"
+        })
+        .where("rarity_game.id", create.id)
+        .first()
+
+        return {
+            message: "Berhasil Membuat Rarity",
+            data: ChangeRarity(get)
         }
     }
 

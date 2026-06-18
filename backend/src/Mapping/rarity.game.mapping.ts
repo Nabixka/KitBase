@@ -38,3 +38,17 @@ export function RarityByGame(data: any[]){
         ]
     }
 }
+
+export function ChangeRarity(data: any){
+    return {
+        game: {
+            id: data.game_id,
+            name: data.game_name
+        },
+        rarity: {
+            id: data.id,
+            value: data.value,
+            icon: data.icon
+        }
+    }
+}

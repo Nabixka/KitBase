@@ -5,8 +5,9 @@ import { diskStorage } from 'multer';
 import { extname } from 'path';
 import { ValidateElementExist } from 'src/Pipes/ValidateElementExist';
 import { existsSync, mkdirSync } from 'fs';
+import { ValidateGameExist } from 'src/Pipes/ValidateGameExist';
 
-@Controller('element-game')
+@Controller('element')
 export class ElementGameController {
   constructor(private elementGameService: ElementGameService) {}
 
@@ -15,16 +16,16 @@ export class ElementGameController {
     return this.elementGameService.getAll()
   }
 
-  @Get('/game')
-  getByGame(@Param('game') id: string){
+  @Get('/game/:id')
+  getByGame(@Param('id', ValidateGameExist) id: string){
     return this.elementGameService.getByGame(Number(id))
   }
 
-  @Post()
+  @Post('/game/:game_id')
   @UseInterceptors(FileInterceptor('element_icon', {
     storage: diskStorage({
       destination(req, file, callback){
-        const game = req.body.game_name || req.body.game_id || 'unknown';
+        const game = req.params.game_id || 'unknown';
         const path = `./uploads/${game}/element`
         if (!existsSync(path)) {
         mkdirSync(path, { recursive: true });
@@ -38,11 +39,11 @@ export class ElementGameController {
       },
     })
   }))
-  createGame(@Body() data: { element_name: string, game_id: number}, @UploadedFile() file: Express.Multer.File ){
+  createGame(@Param('game_id') game_id: string, @Body() data: { element_name: string}, @UploadedFile() file: Express.Multer.File ){
     console.log(data, file)
-    if(!file || !data.element_name || !data.game_id) throw new BadRequestException("Isi Dengan Benar")
-    const gameFolder = data.game_id
-    return this.elementGameService.create({...data, element_icon: `/uploads/${gameFolder}/elements/${file.filename}`})
+    if(!file || !data.element_name || !game_id) throw new BadRequestException("Isi Dengan Benar")
+    const gameFolder = game_id
+    return this.elementGameService.create({...data, game_id: Number(gameFolder), element_icon: `/uploads/${gameFolder}/elements/${file.filename}`})
   }
 
   @Patch('/:id')

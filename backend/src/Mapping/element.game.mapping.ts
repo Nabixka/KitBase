@@ -1,3 +1,5 @@
+import { NotFoundException } from "@nestjs/common";
+
 export function GroupElementByGame(data: any[]) {
     const grouped = data.reduce((acc, row) => {
         if (!acc[row.game_id]) {
@@ -21,12 +23,7 @@ export function GroupElementByGame(data: any[]) {
 }
 
 export function ElementByGameMapping(data: any[]){
-    if (!data || data.length === 0) {
-        return {
-            game: null,
-            element: []
-        };
-    }
+    if (!data || data.length === 0) throw new NotFoundException("Element Dari Game Tidak Ada")
 
     return {
         game: {
