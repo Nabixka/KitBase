@@ -22,32 +22,32 @@ export class GameController {
   @Post('/')
   @UseInterceptors(FileInterceptor('image', {
     storage: diskStorage({
-      destination: "./uploads/game",
+      destination: "./uploads/logo",
       filename(req, file, callback) {
         const unique = Date.now() + '-' + Math.round(Math.random() * 1e9)
         const ext = extname(file.originalname)
-        callback(null, `${file.fieldname}-${unique}-${ext}`)
+        callback(null, `${file.fieldname}-${unique}${ext}`)
       },
     })
   }))
   create(@Body() data: { name: string}, @UploadedFile() file: Express.Multer.File){
     if(!file || !data.name ) throw new BadRequestException("Isi Data Dengan Benar")
-    return this.gameService.create({...data, image: `/uploads/game/${file.filename}`})
+    return this.gameService.create({...data, image: `/uploads/logo/${file.filename}`})
   }
 
   @Patch('/:id')
   @UseInterceptors(FileInterceptor('image', {
     storage: diskStorage({
-      destination: './uploads/game',
+      destination: './uploads/logo',
       filename(req, file, callback) {
         const unique = Date.now() + '-' + Math.round(Math.random() * 1e9 )
         const ext = extname(file.originalname)
-        callback(null, `${file.fieldname}-${unique}-${ext}`)
+        callback(null, `${file.fieldname}-${unique}${ext}`)
       },
     })
   }))
   update(@Param('id', ValidateGameExist) id: string, @Body() data: { name: string }, @UploadedFile() file: Express.Multer.File){
-    return this.gameService.update(Number(id), {...data, image: file ? `/uploads/game/${file.filename}` : undefined})
+    return this.gameService.update(Number(id), {...data, image: file ? `/uploads/logo/${file.filename}` : undefined})
   }
 
   @Delete('/:id')

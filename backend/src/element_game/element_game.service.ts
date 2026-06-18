@@ -24,7 +24,7 @@ export class ElementGameService {
 
     }
 
-    async getByGame(game: string){
+    async getByGame(id: number){
         const get = await this.knexService.connection("element_game")
         .join("game", "game.id", "game_id")
         .select({
@@ -34,7 +34,7 @@ export class ElementGameService {
             game_id: "game.id",
             game_name: "game.name"
         })
-        .where("game.name", game)
+        .where("game.id", id)
         if(!get) throw new NotFoundException("Element Atau Game Tidak Ada")
 
         return {
@@ -84,7 +84,7 @@ export class ElementGameService {
     }
 
     async delete(id: number){
-        const del = await this.knexService.connection("element_game").where({id})
+        const del = await this.knexService.connection("element_game").where('id', id)
         return {
             message: "Berhasil Menghapus Element"
         }

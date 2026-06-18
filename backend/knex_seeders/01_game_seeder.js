@@ -8,15 +8,15 @@ exports.seed = async function(knex) {
   await knex('game').insert([
     {
       name: 'Honkai: Star Rail',
-      image: 'http://localhost:3000/uploads/honkai_star_rail'
+      image: 'http://localhost:3000/uploads/logo/hsr.webp'
     },
     {
       name: 'Genshin Impact',
-      image: 'http://localhost:3000/uploads/genshin_impact'
+      image: 'http://localhost:3000/uploads/logo/gi.webp'
     },
     {
       name: 'Zenless Zone Zero',
-      image: 'http://localhost:3000/uploads/zenless_zone_zero'
+      image: 'http://localhost:3000/uploads/logo/zzz.webp'
     }
   ]);
 };
