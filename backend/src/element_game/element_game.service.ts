@@ -35,7 +35,7 @@ export class ElementGameService {
             game_name: "game.name"
         })
         .where("game.id", id)
-        if(!get) throw new NotFoundException("Element Atau Game Tidak Ada")
+        if(!get) throw new NotFoundException("Element Tidak Ada")
 
         return {
             message: "Berhasil Mendapatkan Element Berdasarkan Game",

@@ -1,5 +1,7 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Delete, Get, Param } from '@nestjs/common';
 import { RarityGameService } from './rarity_game.service';
+import { ValidateRarityExist } from 'src/Pipes/ValidateRarityExists';
+import { ValidateGameExist } from 'src/Pipes/ValidateGameExist';
 
 @Controller('rarity-game')
 export class RarityGameController {
@@ -11,7 +13,12 @@ export class RarityGameController {
   }
 
   @Get('/:id')
-  getByGame(@Param('id') id: string){
+  getByGame(@Param('id', ValidateGameExist) id: string){
     return this.rarityGameService.getByGame(Number(id))
+  }
+
+  @Delete('/:id')
+  deleteRarity(@Param('id', ValidateRarityExist) id: string){
+    return this.rarityGameService.delete(Number(id))
   }
 }
