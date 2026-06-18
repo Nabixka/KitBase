@@ -1,6 +1,6 @@
 import { BadRequestException, Body, Controller, Delete, Get, Param, Patch, Post, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { RarityGameService } from './rarity_game.service';
-import { ValidateRarityExist } from 'src/Pipes/ValidateRarityExists';
+import { ValidateRarityExist } from 'src/Pipes/ValidateRarityExist';
 import { ValidateGameExist } from 'src/Pipes/ValidateGameExist';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';

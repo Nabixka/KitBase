@@ -39,7 +39,7 @@ export class ElementGameController {
       },
     })
   }))
-  createGame(
+  createElement(
     @Param('game_id') game_id: string, 
     @Body() data: { element_name: string}, @UploadedFile() file: Express.Multer.File ){
       if(!file || !data.element_name || !game_id) throw new BadRequestException("Isi Dengan Benar")
@@ -65,7 +65,7 @@ export class ElementGameController {
       },
     })
   }))
-  updateGame(
+  updateElement(
     @Param('id', ValidateElementExist) id: string,  
     @Param('game_id', ValidateGameExist) game_id: string,
     @Body() data: { element_name: string }, @UploadedFile() file: Express.Multer.File){
@@ -74,7 +74,7 @@ export class ElementGameController {
   }
 
   @Delete('/:id')
-  deleteGame(@Param('id', ValidateElementExist) id: string){
+  deleteElement(@Param('id', ValidateElementExist) id: string){
     return this.elementGameService.delete(Number(id))
   }
 }

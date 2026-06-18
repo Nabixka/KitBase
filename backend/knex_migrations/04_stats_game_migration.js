@@ -7,7 +7,7 @@ exports.up = function(knex) {
     table.increments()
     table.integer("game_id").unsigned().notNullable().index()
     table.string('stat_name').notNullable()
-    table.integer('value').notNullable()
+    table.text('icon').notNullable()
 
     table.foreign("game_id").references("game.id").onDelete('CASCADE')
   })

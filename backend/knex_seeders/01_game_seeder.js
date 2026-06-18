@@ -8,15 +8,15 @@ exports.seed = async function(knex) {
   await knex('game').insert([
     {
       name: 'Honkai: Star Rail',
-      image: 'http://localhost:3000/uploads/logo/hsr.webp'
+      image: '/uploads/logo/hsr.webp'
     },
     {
       name: 'Genshin Impact',
-      image: 'http://localhost:3000/uploads/logo/gi.webp'
+      image: '/uploads/logo/gi.webp'
     },
     {
       name: 'Zenless Zone Zero',
-      image: 'http://localhost:3000/uploads/logo/zzz.webp'
+      image: '/uploads/logo/zzz.webp'
     }
   ]);
 };
@@ -36,7 +36,7 @@ exports.seed = async function(knex) {
 //   for (let i = 1; i <= totalData; i++) {
 //     gamesSeeder.push({
 //       name: `Honkai: Star Rail ${i}`,
-//       image: `http://localhost:3000/uploads/honkai_star_rail_${i}`
+//       image: `/uploads/honkai_star_rail_${i}`
 //     });
 //   }
 

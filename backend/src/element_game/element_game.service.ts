@@ -84,7 +84,7 @@ export class ElementGameService {
     }
 
     async delete(id: number){
-        const del = await this.knexService.connection("element_game").where('id', id)
+        const del = await this.knexService.connection("element_game").delete().where('id', id)
         return {
             message: "Berhasil Menghapus Element"
         }
