@@ -26,7 +26,7 @@ export class ElementGameController {
     storage: diskStorage({
       destination(req, file, callback){
         const game = req.params.game_id || 'unknown';
-        const path = `./uploads/${game}/element`
+        const path = `./uploads/${game}/elements`
         if (!existsSync(path)) {
         mkdirSync(path, { recursive: true });
         }
@@ -39,19 +39,20 @@ export class ElementGameController {
       },
     })
   }))
-  createGame(@Param('game_id') game_id: string, @Body() data: { element_name: string}, @UploadedFile() file: Express.Multer.File ){
-    console.log(data, file)
-    if(!file || !data.element_name || !game_id) throw new BadRequestException("Isi Dengan Benar")
-    const gameFolder = game_id
-    return this.elementGameService.create({...data, game_id: Number(gameFolder), element_icon: `/uploads/${gameFolder}/elements/${file.filename}`})
+  createGame(
+    @Param('game_id') game_id: string, 
+    @Body() data: { element_name: string}, @UploadedFile() file: Express.Multer.File ){
+      if(!file || !data.element_name || !game_id) throw new BadRequestException("Isi Dengan Benar")
+      const gameFolder = game_id
+      return this.elementGameService.create({...data, game_id: Number(gameFolder), element_icon: `/uploads/${gameFolder}/elements/${file.filename}`})
   }
 
-  @Patch('/:id')
+  @Patch('/:id/game/:game_id')
   @UseInterceptors(FileInterceptor('element_icon', {
     storage: diskStorage({
       destination(req, file, callback){
-        const game = req.body.game_id || req.body.game_name || 'unknown'
-        const path = `/uploads/${game}/elements`
+        const game = req.params.game_id || 'unknown'
+        const path = `./uploads/${game}/elements`
         if(!existsSync(path)){
           mkdirSync(path, { recursive: true })
         }
@@ -64,9 +65,12 @@ export class ElementGameController {
       },
     })
   }))
-  updateGame(@Param('id') id: string,  @Body() data: { element_name: string, game_id: number}, @UploadedFile() file: Express.Multer.File){
-    const gameFolder = data.game_id
-    return this.elementGameService.update(Number(id), {...data, element_icon: file ? `/uploads/${gameFolder}/elements/${file.filename}` : undefined})
+  updateGame(
+    @Param('id', ValidateElementExist) id: string,  
+    @Param('game_id', ValidateGameExist) game_id: string,
+    @Body() data: { element_name: string }, @UploadedFile() file: Express.Multer.File){
+      const gameFolder = game_id
+      return this.elementGameService.update(Number(id), {...data, game_id: Number(game_id), element_icon: file ? `/uploads/${gameFolder}/elements/${file.filename}` : undefined})
   }
 
   @Delete('/:id')

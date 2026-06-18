@@ -64,7 +64,7 @@ export class ElementGameService {
     }
 
     async update(id: number, data: { element_name: string, element_icon?: string, game_id: number}){
-        const [update] = await this.knexService.connection("element_game").update(data).where('id', id).returning("id")
+        const [update] = await this.knexService.connection("element_game").update(data).where('id', id)
         const get = await this.knexService.connection("element_game")
         .join("game", "game.id", "game_id")
         .select({
@@ -74,7 +74,7 @@ export class ElementGameService {
             game_id: "game.id",
             game_name: "game.name"
         })
-        .where("element_game.id", update.id)
+        .where("element_game.id", id)
         .first()
 
         return {

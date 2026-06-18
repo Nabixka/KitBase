@@ -63,6 +63,26 @@ export class RarityGameService {
         }
     }
 
+    async update(id: number, data: { value: string, icon?: string, game_id: number }){
+        const update = await this.knexService.connection("rarity_game").update(data).where("id", id)
+        const get = await this.knexService.connection("rarity_game")
+        .join("game", "game.id", "game_id")
+        .select({
+            "id": "rarity_game.id",
+            "game_id": "game.id",
+            "game_name": "game.name",
+            "icon": "rarity_game.icon",
+            "value": "rarity_game.value"
+        })
+        .where("rarity_game.id", id)
+        .first()
+
+        return {
+            message: "Berhasil Mengupdate Rarity",
+            data: ChangeRarity(get)
+        }
+    }
+
     async delete(id: number){
         const del = await this.knexService.connection("rarity_game").delete().where("id", id)
         return {
