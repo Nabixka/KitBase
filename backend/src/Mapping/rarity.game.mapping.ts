@@ -29,13 +29,12 @@ export function RarityByGame(data: any[]){
             id: data[0].game_id,
             name: data[0].game_name
         },
-        rarity: [
+        rarity:
             data.map(e => ({
                 id: e.id,
                 value: e.value,
                 icon: e.icon
             }))
-        ]
     }
 }
 

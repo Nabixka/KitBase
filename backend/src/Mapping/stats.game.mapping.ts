@@ -30,13 +30,12 @@ export function StatsByGame(data: any[]){
             id: data[0].game_id,
             name: data[0].game_name
         },
-        stats: [
+        stats: 
             data.map(e => ({
                 id: e.id,
                 stat_name: e.stat_name,
                 icon: e.icon
             }))
-        ]
     }
 }
 

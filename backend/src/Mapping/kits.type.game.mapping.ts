@@ -29,12 +29,11 @@ export function KitsByGame(data: any[]){
             id: data[0].game_id,
             name: data[0].game_name
         },
-        kits: [
+        kits:
             data.map(e => ({
                 id: e.id,
                 name: e.kits_type_name
             }))
-        ]
     }
 }
 
