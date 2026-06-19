@@ -64,6 +64,7 @@ export class StatsGameService {
     async updateStat(id: number, data: { icon?: string, game_id: number, stat_name: string }){
         const update = await this.knexService.connection("stats_game").update(data).where("id", id)
         const get = await this.knexService.connection("stats_game")
+        .join("game", "game.id", "game_id")
         .select({
             "id": "stats_game.id",
             "stat_name": "stats_game.stat_name",
