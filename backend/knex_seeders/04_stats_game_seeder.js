@@ -8,27 +8,27 @@ exports.seed = async function(knex) {
   await knex('stats_game').insert([
     {
       "game_id": 1,
-      "stats_name": "Base HP",
+      "stat_name": "Base HP",
       "icon": "/uploads/1/stats_icon/base_hp.webp"
     },
     {
       "game_id": 1,
-      "stats_name": "Base ATK",
+      "stat_name": "Base ATK",
       "icon": "/uploads/1/stats_icon/base_atk.webp"
     },
     {
       "game_id": 1,
-      "stats_name": "Base DEFF",
+      "stat_name": "Base DEFF",
       "icon": "/uploads/1/stats_icon/base_deff.webp"
     },
     {
       "game_id": 1,
-      "stats_name": "Base SPD",
+      "stat_name": "Base SPD",
       "icon": "/uploads/1/stats_icon/base_spd.webp"
     },
     {
       "game_id": 1,
-      "stats_name": "Max Energy",
+      "stat_name": "Max Energy",
       "icon": "/uploads/1/stats_icon/max_energy.webp"
     }
   ]);

@@ -39,3 +39,17 @@ export function StatsByGame(data: any[]){
         ]
     }
 }
+
+export function ChangeStat(data: any){
+    return {
+        game: {
+            id: data.game_id,
+            name: data.game_name
+        },
+        stat: {
+            id: data.stat_name,
+            stat_name: data.stat_name,
+            icon: data.icon
+        }
+    }
+}
