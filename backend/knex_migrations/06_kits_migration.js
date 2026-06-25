@@ -11,7 +11,7 @@ exports.up = function(knex) {
     table.integer('stats_id').unsigned().nullable()
     table.integer('kits_type_game_id').unsigned().notNullable()
     table.text('image_vidio').nullable()
-    table.text('icon').notNullable()
+    table.text('icon').nullable()
     table.enum('target', ['Single Target', 'Bounce', 'AoE', 'Blast', 'Support', 'Restore', 'Defense', 'Impair', 'Stealth', 'Enhance']).nullable()
 
     table.foreign('kits_type_game_id').references('kits_type_game.id').onDelete('CASCADE')
