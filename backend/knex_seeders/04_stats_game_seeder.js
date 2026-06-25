@@ -30,6 +30,21 @@ exports.seed = async function(knex) {
       "game_id": 1,
       "stat_name": "Max Energy",
       "icon": "/uploads/1/stats_icon/max_energy.webp"
+    },
+    {
+      "game_id": 1,
+      "stat_name" : "HP",
+      "icon" : "/uploads/1/stats_icon/hp.webp"
+    },
+    {
+      "game_id": 1,
+      "stat_name" : "ATK",
+      "icon" : "/uploads/1/stats_icon/atk.webp"
+    },
+    {
+      "game_id": 1,
+      "stat_name" : "DEF",
+      "icon" : "/uploads/1/stats_icon/def.webp"
     }
   ]);
 };

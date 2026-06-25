@@ -1,6 +1,6 @@
 import { NotFoundException } from "@nestjs/common"
 
-export function GroupKitsByGame(data: any[]){
+export function GroupKitsTypeByGame(data: any[]){
     const grouped = data.reduce((acc, row) => {
         if(!acc[row.game_id]){
             acc[row.game_id] = {
@@ -21,7 +21,7 @@ export function GroupKitsByGame(data: any[]){
     return Object.values(grouped)
 }
 
-export function KitsByGame(data: any[]){
+export function KitsTypeByGame(data: any[]){
     if(data.length === 0 || !data) throw new NotFoundException("Tidak Ada Type Kit Dari Game Tersebut")
     
     return {
@@ -37,7 +37,7 @@ export function KitsByGame(data: any[]){
     }
 }
 
-export function ChangeKits(data: any){
+export function ChangeKitsType(data: any){
     return {
         game: {
             id: data.game_id,

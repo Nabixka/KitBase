@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { KnexService } from 'src/database/knexService';
-import { ChangeKits, GroupKitsByGame, KitsByGame } from 'src/Mapping/kits.type.game.mapping';
+import { ChangeKitsType, GroupKitsTypeByGame, KitsTypeByGame } from 'src/Mapping/kits.type.game.mapping';
 
 @Injectable()
 export class KitsTypeGameService {
@@ -18,7 +18,7 @@ export class KitsTypeGameService {
 
         return {
             message: "Berhasil Mengambil Type Kits Dari Semua Game",
-            data: GroupKitsByGame(get)
+            data: GroupKitsTypeByGame(get)
         }
     }
 
@@ -35,7 +35,7 @@ export class KitsTypeGameService {
 
         return {
             message: "Berhasil Mengambil Type Kits Dari Game",
-            data: KitsByGame(get)
+            data: KitsTypeByGame(get)
         }
     }
 
@@ -53,7 +53,7 @@ export class KitsTypeGameService {
 
         return {
             message: "Berhasil Membuat Type Kits",
-            data: ChangeKits(get)
+            data: ChangeKitsType(get)
         }
     }
 
@@ -71,7 +71,7 @@ export class KitsTypeGameService {
 
         return {
             message: "Berhasil Mengubah Type kits",
-            data: ChangeKits(get)
+            data: ChangeKitsType(get)
         }
     }
 
