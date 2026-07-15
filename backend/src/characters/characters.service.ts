@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { KnexService } from 'src/database/knexService';
+import { MappingByRarityAndElementCharacter } from 'src/Mapping/characters.mapping';
 
 @Injectable()
 export class CharactersService {
@@ -25,7 +26,7 @@ export class CharactersService {
 
         return {
             message: "Berhasil Mengambil Semua Karakter",
-            data : 
+            data : MappingByRarityAndElementCharacter(get)
         }
     }
 }
