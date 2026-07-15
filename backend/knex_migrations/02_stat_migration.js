@@ -3,7 +3,10 @@
  * @returns { Promise<void> }
  */
 exports.up = function(knex) {
-  
+  return knex.schema.createTable('stat', function(table){
+    table.increments()
+    table.string('stat_name').notNullable()
+  })
 };
 
 /**
@@ -11,5 +14,5 @@ exports.up = function(knex) {
  * @returns { Promise<void> }
  */
 exports.down = function(knex) {
-  
+  return knex.schema.dropTable('stat')
 };

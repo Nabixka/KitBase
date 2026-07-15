@@ -3,13 +3,13 @@
  * @returns { Promise<void> }
  */
 exports.up = function(knex) {
-  return knex.schema.createTable('stats_game', function(table){
+  return knex.schema.createTable('path_game', function(table){
     table.increments()
-    table.integer("game_id").unsigned().notNullable().index()
-    table.string('stat_name').notNullable()
+    table.integer('game_id').unsigned().index()
+    table.string('name').notNullable()
     table.text('icon').notNullable()
 
-    table.foreign("game_id").references("game.id").onDelete('CASCADE')
+    table.foreign('game_id').references('game.id').onDelete('CASCADE')
   })
 };
 
@@ -18,5 +18,5 @@ exports.up = function(knex) {
  * @returns { Promise<void> }
  */
 exports.down = function(knex) {
-  return knex.schema.dropTable('stats_game')
+  return knex.schema.dropTable('path_game')
 };
