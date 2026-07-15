@@ -6,6 +6,8 @@ exports.seed = async function(knex) {
   // Deletes ALL existing entries
   await knex('kits_type_game').del()
   await knex('kits_type_game').insert([
+
+    // HSR
     {
       "kits_type_name" : "Basic ATK",
       "game_id" : 1
@@ -45,6 +47,36 @@ exports.seed = async function(knex) {
     {
       "kits_type_name" : "Minor Trace",
       "game_id" : 1 
+    },
+
+    // Gi
+    {
+      "kits_type_name" : "Normal Attack",
+      "game_id" : 2
+    },
+    {
+      "kits_type_name" : "Charged Attack",
+      "game_id" : 2
+    },
+    {
+      "kits_type_name" : "Plunging Attack",
+      "game_id" : 2
+    },
+    {
+      "kits_type_name" : "Elemental Skill",
+      "game_id" : 2
+    },
+    {
+      "kits_type_name" : "Elemental Burst",
+      "game_id" : 2
+    },
+    {
+      "kits_type_name" : "Passive",
+      "game_id" : 2
+    },
+    {
+      "kits_type_name" : "Constelation",
+      "game_id" : 2
     },
   ]);
 };

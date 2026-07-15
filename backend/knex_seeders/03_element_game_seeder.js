@@ -49,7 +49,7 @@ exports.seed = async function(knex) {
       "element_name" : "Anemo",
       "element_icon" : "/uploads/2/element/anemo_gi.webp",
       "game_id" : 2
-    },
+    }, // 8
     {
       "element_name" : "Pyro",
       "element_icon" : "/uploads/2/element/pyro_gi.webp",

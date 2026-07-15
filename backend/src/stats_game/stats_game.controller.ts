@@ -7,7 +7,7 @@ import { diskStorage } from 'multer';
 import { existsSync, mkdirSync } from 'fs';
 import { extname } from 'path';
 
-@Controller('stats')
+@Controller('stats-game')
 export class StatsGameController {
   constructor(private statsGameService: StatsGameService) {}
 

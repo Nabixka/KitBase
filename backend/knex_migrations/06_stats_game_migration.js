@@ -6,7 +6,7 @@ exports.up = function(knex) {
   return knex.schema.createTable('stats_game', function(table){
     table.increments()
     table.integer("game_id").unsigned().notNullable().index()
-    table.string('stat_id').unsigned().notNullable()
+    table.integer('stat_id').unsigned().notNullable()
     table.text('icon').notNullable()
 
     table.foreign("game_id").references("game.id").onDelete('CASCADE')
