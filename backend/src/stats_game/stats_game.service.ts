@@ -13,6 +13,7 @@ export class StatsGameService {
         .select({
             "id": "stats_game.id",
             "icon": "stats_game.icon",
+            "stat_id": "stat.id",
             "stat_name": "stat.stat_name",
             "game_id": "game.id",
             "game_name": "game.name"
@@ -31,6 +32,7 @@ export class StatsGameService {
         .select({
             "id": "stats_game.id",
             "icon": "stats_game.icon",
+            "stat_id": "stat.id",
             "stat_name": "stat.stat_name",
             "game_id": "game.id",
             "game_name": "game.name"
@@ -51,6 +53,7 @@ export class StatsGameService {
         .select({
             "id": "stats_game.id",
             "icon": "stats_game.icon",
+            "stat_id": "stat.id",
             "stat_name": "stat.stat_name",
             "game_id": "game.id",
             "game_name": "game.name"
@@ -72,6 +75,7 @@ export class StatsGameService {
         .select({
             "id": "stats_game.id",
             "icon": "stats_game.icon",
+            "stat_id": "stat.id",
             "stat_name": "stat.stat_name",
             "game_id": "game.id",
             "game_name": "game.name"

@@ -45,8 +45,8 @@ export class StatsGameController {
     @Body('stat_id', ValidateStatExist) stat_id: string,
     @UploadedFile() file: Express.Multer.File){
       if(!file || !stat_id || !game_id) throw new BadRequestException("Isi Yang Benar")
-      const stat = Number(stat_id)
-      return this.statsGameService.createGameStat({stat_id: stat, game_id: Number(game_id), icon: `/uploads/${game_id}/stats_icon/${file.filename}` })
+      const statId = Number(stat_id)
+      return this.statsGameService.createGameStat({stat_id: statId, game_id: Number(game_id), icon: `/uploads/${game_id}/stats_icon/${file.filename}` })
   }
 
   @Patch('/:id/game/:game_id')
@@ -55,6 +55,9 @@ export class StatsGameController {
       destination(req, file, callback) {
         const game = req.params.game_id || 'unknown'
         const path = `./uploads/${game}/stats_icon`
+        if(!existsSync(path)){
+          mkdirSync(path, { recursive: true})
+        }
         callback(null, path)
       },
       filename(req, file, callback) {
@@ -67,12 +70,12 @@ export class StatsGameController {
   update(
     @Param('id', ValidateStatGameExist) id: string,
     @Param('game_id', ValidateGameExist) game_id: string,
-    @Body() data: { stat_id: string },
+    @Body('stat_id', ValidateStatExist) stat_id: string,
     @UploadedFile() file: Express.Multer.File
   ){
     const gameId = Number(game_id)
-    const stat_id = Number(data.stat_id)
-    return this.statsGameService.updateStat(Number(id), {stat_id: stat_id, game_id: gameId, icon: file ? `/uploads/${gameId}/stats_icon/${file.filename}` : undefined})
+    const statId = Number(stat_id)
+    return this.statsGameService.updateStat(Number(id), {stat_id: statId, game_id: gameId, icon: file ? `/uploads/${gameId}/stats_icon/${file.filename}` : undefined})
   }
 
   @Delete("/:id")

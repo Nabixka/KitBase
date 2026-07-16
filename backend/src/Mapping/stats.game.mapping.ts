@@ -33,7 +33,10 @@ export function StatsByGame(data: any[]){
         stats: 
             data.map(e => ({
                 id: e.id,
-                stat_name: e.stat_name,
+                stat: {
+                    id: e.stat_id,
+                    name: e.stat_name,
+                },
                 icon: e.icon
             }))
     }
@@ -41,12 +44,13 @@ export function StatsByGame(data: any[]){
 
 export function ChangeStat(data: any){
     return {
+        id: data.id,
         game: {
             id: data.game_id,
             name: data.game_name
         },
         stat: {
-            id: data.id,
+            id: data.stat_id,
             stat_name: data.stat_name,
             icon: data.icon
         }
