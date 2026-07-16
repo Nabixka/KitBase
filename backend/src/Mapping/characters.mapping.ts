@@ -1,7 +1,9 @@
-export function MappingByRarityAndElementCharacter(data: any[]){
+export function MappingByRarityAndElementCharacter(data: any[]) {
     const grouped = data.reduce((acc, row) => {
-        if(!acc[row.rarity_id]){
-            acc[row.rarity_id] = {
+        const groupKey = `${row.rarity_id}-${row.element_id}`;
+
+        if (!acc[groupKey]) {
+            acc[groupKey] = {
                 rarity: {
                     id: row.rarity_id,
                     icon: row.rarity_icon,
@@ -13,17 +15,17 @@ export function MappingByRarityAndElementCharacter(data: any[]){
                     name: row.element_name
                 },
                 characters: []
-            } 
+            };
         }
 
-        acc[row.rarity_id].characters.push({
+        acc[groupKey].characters.push({
             id: row.id,
             name: row.name,
             image: row.image
-        })
+        });
 
-        return acc
-    }, {})
+        return acc;
+    }, {});
 
-    return Object.values(grouped)
+    return Object.values(grouped);
 }

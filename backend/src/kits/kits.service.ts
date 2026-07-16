@@ -9,6 +9,7 @@ export class KitsService {
     async getAll(){
         const get = await this.knexService.connection("kits")
         .leftJoin("stats_game", "stats_game.id", "kits.stats_id")
+        .leftJoin("stat", "stat.id", "stats_game.stat_id") 
         .leftJoin("kits_type_game", "kits_type_game.id", "kits.kits_type_game_id")
         .select({
             "id" : "kits.id",
@@ -20,7 +21,7 @@ export class KitsService {
             "target" : "kits.target",
             
             "stats_id" : "stats_game.id",
-            "stats_name" : "stats_game.stat_name",
+            "stats_name" : "stat.stat_name",
             "stats_icon" : "stats_game.icon",
             
             "kits_type_id" : "kits_type_game.id",
