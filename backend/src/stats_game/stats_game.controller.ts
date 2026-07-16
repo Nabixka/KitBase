@@ -1,11 +1,11 @@
 import { BadRequestException, Body, Controller, Delete, Get, Param, Patch, Post, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { StatsGameService } from './stats_game.service';
-import { ValidateGameExist } from 'src/Pipes/ValidateGameExist';
-import { ValidateStatExist } from 'src/Pipes/ValidateStatExist';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { existsSync, mkdirSync } from 'fs';
 import { extname } from 'path';
+import { ValidateGameExist } from 'src/Pipes/ValidateGameExist';
+import { ValidateStatGameExist } from 'src/Pipes/ValidateStatGameExist';
 
 @Controller('stats-game')
 export class StatsGameController {
@@ -63,7 +63,7 @@ export class StatsGameController {
     })
   }))
   update(
-    @Param('id', ValidateStatExist) id: string,
+    @Param('id', ValidateStatGameExist) id: string,
     @Param('game_id', ValidateGameExist) game_id: string,
     @Body() data: { stat_name: string },
     @UploadedFile() file: Express.Multer.File
@@ -73,7 +73,7 @@ export class StatsGameController {
   }
 
   @Delete("/:id")
-  delete(@Param('id', ValidateStatExist) id: string){
+  delete(@Param('id', ValidateStatGameExist) id: string){
     return this.statsGameService.deleteStat(Number(id))
   }
 }

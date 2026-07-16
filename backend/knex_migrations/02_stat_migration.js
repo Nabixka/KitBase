@@ -5,7 +5,7 @@
 exports.up = function(knex) {
   return knex.schema.createTable('stat', function(table){
     table.increments()
-    table.string('stat_name').notNullable()
+    table.string('stat_name').notNullable().unique()
   })
 };
 
