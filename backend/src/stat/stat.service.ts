@@ -22,16 +22,16 @@ export class StatService {
         }
     }
 
-    async create(stat_name: string){
-        const [get] = await this.knexService.connection('stat').insert(stat_name).returning("*")
+    async create(data: { stat_name: string }){
+        const [get] = await this.knexService.connection('stat').insert(data).returning("*")
         return {
             message: "Berhasil Membuat Stat",
             data: get
         }
     }
 
-    async update(id: number, stat_name: string){
-        const put = await this.knexService.connection('stat').update(stat_name).where("id", id).returning("*")
+    async update(id: number, data: { stat_name: string }){
+        const put = await this.knexService.connection('stat').update(data).where("id", id).returning("*")
         return {
             message: "Berhasil Mengupdate Stat",
             data: put

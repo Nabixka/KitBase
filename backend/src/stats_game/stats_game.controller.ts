@@ -6,6 +6,7 @@ import { existsSync, mkdirSync } from 'fs';
 import { extname } from 'path';
 import { ValidateGameExist } from 'src/Pipes/ValidateGameExist';
 import { ValidateStatGameExist } from 'src/Pipes/ValidateStatGameExist';
+import { ValidateStatExist } from 'src/Pipes/ValidateStatExist';
 
 @Controller('stats-game')
 export class StatsGameController {
@@ -27,7 +28,7 @@ export class StatsGameController {
         destination(req, file, callback) {
           const game = req.params.game_id || 'unknown'
           const path = `./uploads/${game}/stats_icon`
-          if(!existsSync){
+          if(!existsSync(path)){
             mkdirSync(path, { recursive: true })
           }
           callback(null, path)
@@ -41,10 +42,11 @@ export class StatsGameController {
     }))
   create(
     @Param('game_id', ValidateGameExist) game_id: string,
-    @Body() data: { stat_name: string},
+    @Body('stat_id', ValidateStatExist) stat_id: string,
     @UploadedFile() file: Express.Multer.File){
-      if(!file || !data || !game_id) throw new BadRequestException("Isi Yang Benar")
-      return this.statsGameService.createStat({...data, game_id: Number(game_id), icon: `/uploads/${game_id}/stats_icon/${file.filename}` })
+      if(!file || !stat_id || !game_id) throw new BadRequestException("Isi Yang Benar")
+      const stat = Number(stat_id)
+      return this.statsGameService.createGameStat({stat_id: stat, game_id: Number(game_id), icon: `/uploads/${game_id}/stats_icon/${file.filename}` })
   }
 
   @Patch('/:id/game/:game_id')
@@ -65,11 +67,12 @@ export class StatsGameController {
   update(
     @Param('id', ValidateStatGameExist) id: string,
     @Param('game_id', ValidateGameExist) game_id: string,
-    @Body() data: { stat_name: string },
+    @Body() data: { stat_id: string },
     @UploadedFile() file: Express.Multer.File
   ){
     const gameId = Number(game_id)
-    return this.statsGameService.updateStat(Number(id), {...data, game_id: gameId, icon: file ? `/uploads/${gameId}/stats_icon/${file.filename}` : undefined})
+    const stat_id = Number(data.stat_id)
+    return this.statsGameService.updateStat(Number(id), {stat_id: stat_id, game_id: gameId, icon: file ? `/uploads/${gameId}/stats_icon/${file.filename}` : undefined})
   }
 
   @Delete("/:id")

@@ -46,7 +46,7 @@ export function ChangeStat(data: any){
             name: data.game_name
         },
         stat: {
-            id: data.stat_name,
+            id: data.id,
             stat_name: data.stat_name,
             icon: data.icon
         }

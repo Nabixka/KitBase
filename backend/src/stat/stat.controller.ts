@@ -18,12 +18,12 @@ export class StatController {
 
   @Post()
   create(@Body('stat_name', ValidateSameStat) stat_name: string){
-    return this.statService.create(stat_name)
+    return this.statService.create({stat_name})
   }
 
   @Put('/:id')
   update(@Param('id', ValidateStatExist) id: string, @Body('stat_name', ValidateSameStat) stat_name: string){
-    return this.statService.update(Number(id), stat_name)
+    return this.statService.update(Number(id), {stat_name})
   }
 
   @Delete('/:id')
