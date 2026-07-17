@@ -133,3 +133,9 @@ backend/
 Dibuat dengan ❤️ oleh tim KitBase
 
 </div>
+
+---
+
+# Note
+
+### <bold>Struktur Akan Dirapihkan Saat Backend Sudah Selesai</bold>

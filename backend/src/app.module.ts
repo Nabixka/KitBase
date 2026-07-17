@@ -8,8 +8,9 @@ import { KitsModule } from './kits/kits.module';
 import { CharactersModule } from './characters/characters.module';
 import { StatModule } from './stat/stat.module';
 import { PathModule } from './path/path.module';
+import { CharacterGameModule } from './character_game/character_game.module';
 
 @Module({
-  imports: [GameModule, ElementGameModule, RarityGameModule, StatsGameModule, KitsTypeGameModule, KitsModule, CharactersModule, StatModule, PathModule]
+  imports: [GameModule, ElementGameModule, RarityGameModule, StatsGameModule, KitsTypeGameModule, KitsModule, CharactersModule, StatModule, PathModule, CharacterGameModule]
 })
 export class AppModule {}
